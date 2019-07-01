@@ -1,1 +1,120 @@
-<p>signup works!</p>
+<div class="container">
+  <div class="py-5 text-center">
+    <img class="d-block mx-auto mb-1" src="../../assets/images/logo.png" alt="" width="72" height="72">
+
+  </div>
+
+  <div class="row">
+    <!-- <dropzone [config]="cof" [message]="'Click or drag images here to upload'" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></dropzone> -->
+
+    <div class="col-md-12">
+      <div class="d-flex flex-column justify-content-center  align-items-center" id="previews">
+
+      </div>
+
+      <div class="d-flex flex-column justify-content-center  align-items-center">
+
+        <img src="../../assets/images/dummy_profile.png" height="60" width="60" class="rounded mx-auto d-block mb-4"
+          alt="..." *ngIf="!isprofileupload">
+        <button class="dropzone" [dropzone]="cof" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"
+          class="btn btn-primary uploadprofile" type="button">Upload Profile</button>
+
+      </div>
+      <form class="needs-validation" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName">First name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="firstName" placeholder="" value="" required name="firstName"
+              [(ngModel)]="model.firstName" #firstName="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }">
+            <div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback">
+              <div *ngIf="firstName.errors.required">First Name is required</div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastName">Last name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="lastName" placeholder="" value="" required name="lastName"
+              [(ngModel)]="model.lastName" #lastName="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }">
+            <div *ngIf="f.submitted && lastName.invalid" class="invalid-feedback">
+              <div *ngIf="lastName.errors.required">Last Name is required</div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="mb-3">
+          <label for="email">Email <span class="text-danger">*</span></label>
+          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"
+            name="email" [(ngModel)]="model.email" #email="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email />
+          <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.email">Email must be a valid email address</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" name="password"
+            [(ngModel)]="model.password" #password="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6"
+            placeholder="*************" />
+          <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="address">Address<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="address" placeholder="1234 Main St" name="address1"
+            [(ngModel)]="model.address1" #address1="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && address1.invalid }" required>
+          <div *ngIf="f.submitted && address1.invalid" class="invalid-feedback">
+            <div *ngIf="address1.errors.required">Address is required</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+          <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="country">Country <span class="text-danger">*</span></label>
+            <select class="custom-select d-block w-100" id="country" required>
+              <option value="">Choose...</option>
+              <option>United States</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid country.
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="state">State <span class="text-danger">*</span></label>
+            <select class="custom-select d-block w-100" id="state" required>
+              <option value="">Choose...</option>
+              <option>California</option>
+            </select>
+            <div class="invalid-feedback">
+              Please provide a valid state.
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="zip">Zip <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="zip" placeholder="" name="zipcode" [(ngModel)]="model.zipcode"
+              #zipcode="ngModel" [ngClass]="{ 'is-invalid': f.submitted && zipcode.invalid }" required>
+            <div *ngIf="f.submitted && zipcode.invalid" class="invalid-feedback">
+              <div *ngIf="zipcode.errors.required">Zipcode required</div>
+            </div>
+          </div>
+        </div>
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Sign in</button>
+      </form>
+    </div>
+  </div>
+</div>

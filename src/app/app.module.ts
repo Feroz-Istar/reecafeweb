@@ -8,7 +8,16 @@ import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProfileComponent } from './profile/profile.component';
-
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { DropzoneModule } from 'ngx-dropzone-wrapper';
+import { DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
+import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
+  // Change this to your upload POST address:
+   url: 'https://httpbin.org/post',
+   maxFilesize: 50,
+   acceptedFiles: 'image/*'
+ };
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,9 +29,15 @@ import { ProfileComponent } from './profile/profile.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    DropzoneModule
   ],
-  providers: [],
+  providers: [{
+    provide: DROPZONE_CONFIG,
+    useValue: DEFAULT_DROPZONE_CONFIG
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
